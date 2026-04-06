@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -83,8 +84,8 @@ public class InvoiceBO {
                 this.invoiceStatus=rs.getString("invoice_status");
                 this.invoiceID=rs.getLong("id");
                 this.invoicePaidAmount = rs.getBigDecimal("invoice_paid_amount");
-                SimpleDateFormat sdf = new SimpleDateFormat("EEE,MMM dd,''yyyy");
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("EEE,MMM dd,''yyyy", Locale.US);
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
                 Date dt = df.parse(rs.getString("date_created"));
                 
@@ -101,7 +102,6 @@ public class InvoiceBO {
                 logger.log(Level.SEVERE, null, ex);
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
             if (logger.isLoggable(Level.SEVERE)) {
                 logger.log(Level.SEVERE, null, ex);
             }
@@ -128,8 +128,8 @@ public class InvoiceBO {
                 user = new UserBO(rs, "CLIENT");
                 invoiceItems = new ArrayList<InvoiceItemsBO>();
                 invoiceItems.add(new InvoiceItemsBO(rs));
-                SimpleDateFormat sdf = new SimpleDateFormat("EEE,MMM dd,''yyyy");
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("EEE,MMM dd,''yyyy", Locale.US);
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
                 Date dt = df.parse(rs.getString("date_created"));
                 
@@ -144,7 +144,6 @@ public class InvoiceBO {
                 logger.log(Level.SEVERE, null, ex);
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
             if (logger.isLoggable(Level.SEVERE)) {
                 logger.log(Level.SEVERE, null, ex);
             }
