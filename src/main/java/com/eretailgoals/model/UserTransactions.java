@@ -46,7 +46,6 @@ public class UserTransactions extends InvoiceBO{
                 this.invoiceStatus="Payment";
                 this.paymentReference=rs.getLong("payment_reference");
         } catch (SQLException ex) {
-            ex.printStackTrace();
             logger.log(Level.SEVERE, null, ex);
         }
     }

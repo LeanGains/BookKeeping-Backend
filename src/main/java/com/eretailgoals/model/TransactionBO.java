@@ -44,6 +44,8 @@ public class TransactionBO extends BankBO{
     
     private String amountTransfered;
 
+    private static final Logger LOGGER = Logger.getLogger(TransactionBO.class.getName());
+
     public TransactionBO(){
         
     }
@@ -84,7 +86,9 @@ public class TransactionBO extends BankBO{
             this.transactionDate = rs.getString("transaction_date");
             
         } catch (SQLException ex) {
-            Logger.getLogger(TransactionBO.class.getName()).log(Level.SEVERE, null, ex);
+            if(LOGGER.isLoggable(Level.SEVERE)) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
         }
     }
 

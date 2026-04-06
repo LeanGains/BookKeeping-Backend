@@ -45,7 +45,9 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now()
         );
 
-        logger.warn("Validation error: {}", errors);
+        if (logger.isWarnEnabled()) {
+            logger.warn("Validation error: {}", errors);
+        }
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 

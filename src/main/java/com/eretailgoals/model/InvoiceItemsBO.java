@@ -40,7 +40,9 @@ public class InvoiceItemsBO extends InvoiceBO{
             this.itemId = rs.getLong("itemid");
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.error("Error fetching results "+ ex);
+            if (logger.isErrorEnabled()) {
+                logger.error("Error fetching results "+ ex);
+            }
         }
     }
 
@@ -64,7 +66,9 @@ public class InvoiceItemsBO extends InvoiceBO{
             invoicePaidAmount = rs.getBigDecimal("invoice_paid_amount");
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.error("Error fetching results "+ ex);
+            if (logger.isErrorEnabled()) {
+                logger.error("Error fetching results "+ ex);
+            }
         }
     }
 

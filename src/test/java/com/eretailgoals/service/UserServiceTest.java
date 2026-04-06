@@ -243,7 +243,53 @@ class UserServiceTest {
 
         // Then
         assertEquals(2, result.getContent().size());
+    }
+
+    @Test
+    void searchUsers_WithFilters_ShouldReturnCorrectTotalElements() {
+        // Given
+        Pageable pageable = PageRequest.of(0, 10);
+        List<User> users = Arrays.asList(testUser, testClient);
+        Page<User> userPage = new PageImpl<>(users, pageable, users.size());
+        
+        when(userRepository.searchUsers(
+            eq(User.UserType.CLIENT), 
+            eq(1L), 
+            eq(true), 
+            eq("John"), 
+            eq(pageable)
+        )).thenReturn(userPage);
+
+        // When
+        Page<User> result = userService.searchUsers(
+            User.UserType.CLIENT, 1L, true, "John", pageable
+        );
+
+        // Then
         assertEquals(2, result.getTotalElements());
+    }
+
+    @Test
+    void searchUsers_WithFilters_ShouldInvokeRepository() {
+        // Given
+        Pageable pageable = PageRequest.of(0, 10);
+        List<User> users = Arrays.asList(testUser, testClient);
+        Page<User> userPage = new PageImpl<>(users, pageable, users.size());
+        
+        when(userRepository.searchUsers(
+            eq(User.UserType.CLIENT), 
+            eq(1L), 
+            eq(true), 
+            eq("John"), 
+            eq(pageable)
+        )).thenReturn(userPage);
+
+        // When
+        userService.searchUsers(
+            User.UserType.CLIENT, 1L, true, "John", pageable
+        );
+
+        // Then
         verify(userRepository).searchUsers(User.UserType.CLIENT, 1L, true, "John", pageable);
     }
 

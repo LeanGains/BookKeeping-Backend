@@ -63,40 +63,51 @@ public class UserBO {
     }
 
     public UserBO(ResultSet rs, String usertype){
+        populateFromResultSet(rs, usertype);
+    }
+
+    private void populateFromResultSet(ResultSet rs, String usertype) {
         try {
             this.id=rs.getLong("id");
             this.adminID = rs.getLong("admin_id");
             if (usertype.equals(UserType.ADMIN.toString())) {
-                this.username=rs.getString("username");
-                this.loginTimestamp = rs.getTimestamp("login_ts");
-                this.firstname = rs.getString("firstname");
-                this.lastname = rs.getString("lastname");
-                this.address = rs.getString("address");
-                this.postcode = rs.getString("postcode");
-                this.companyname = rs.getString("company_name");
-                this.email = rs.getString("email");
-            }else{
-                this.firstname = rs.getString("first_name");
-                this.lastname = rs.getString("last_name");
-                this.address = rs.getString("billing_address");
-                this.postcode = rs.getString("billing_postcode");
-                this.companyname = rs.getString("company_name");
-                this.email = rs.getString("email");
-                this.fax = rs.getString("fax");
-                this.mobile = rs.getString("phone_mobile");
-                this.phoneHome = rs.getString("phone_home");
-                this.phoneOffice = rs.getString("phone_office");
-                this.vat = rs.getString("vat_number");
-                this.userType = rs.getString("user_type");
-                this.dateCreated = rs.getTimestamp("date_created");
+                populateAdminFields(rs);
+            } else {
+                populateClientFields(rs);
             }
-            
-            
         } catch (SQLException ex) {
             ex.printStackTrace();
             Logger.getLogger(UserBO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private void populateAdminFields(ResultSet rs) throws SQLException {
+        this.username=rs.getString("username");
+        this.loginTimestamp = rs.getTimestamp("login_ts");
+        this.firstname = rs.getString("firstname");
+        this.lastname = rs.getString("lastname");
+        this.address = rs.getString("address");
+        this.postcode = rs.getString("postcode");
+        this.companyname = rs.getString("company_name");
+        this.email = rs.getString("email");
+    }
+
+    private void populateClientFields(ResultSet rs) throws SQLException {
+        this.firstname = rs.getString("first_name");
+        this.lastname = rs.getString("last_name");
+        this.address = rs.getString("billing_address");
+        this.postcode = rs.getString("billing_postcode");
+        this.companyname = rs.getString("company_name");
+        this.email = rs.getString("email");
+        this.fax = rs.getString("fax");
+        this.mobile = rs.getString("phone_mobile");
+        this.phoneHome = rs.getString("phone_home");
+        this.phoneOffice = rs.getString("phone_office");
+        this.vat = rs.getString("vat_number");
+        this.userType = rs.getString("user_type");
+        this.dateCreated = rs.getTimestamp("date_created");
+    }
+
     /**
      * @return the userType
      */

@@ -70,7 +70,9 @@ public class BankBO {
             this.accountType = rs.getString("account_type");
             this.currentBalance=rs.getBigDecimal("current_balance");
         } catch (SQLException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            if (logger.isLoggable(Level.SEVERE)) {
+                logger.log(Level.SEVERE, null, ex);
+            }
         }
     }
     /**
