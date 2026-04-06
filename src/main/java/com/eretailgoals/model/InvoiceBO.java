@@ -97,10 +97,14 @@ public class InvoiceBO {
 
             
         } catch (ParseException ex) {
-            Logger.getLogger(InvoiceBO.class.getName()).log(Level.SEVERE, null, ex);
+            if (logger.isLoggable(Level.SEVERE)) {
+                logger.log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, null, ex);
+            if (logger.isLoggable(Level.SEVERE)) {
+                logger.log(Level.SEVERE, null, ex);
+            }
         }
     }
     /**
@@ -136,10 +140,14 @@ public class InvoiceBO {
                 
             
         } catch (ParseException ex) {
-            Logger.getLogger(InvoiceBO.class.getName()).log(Level.SEVERE, null, ex);
+            if (logger.isLoggable(Level.SEVERE)) {
+                logger.log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, null, ex);
+            if (logger.isLoggable(Level.SEVERE)) {
+                logger.log(Level.SEVERE, null, ex);
+            }
         }
     }
 
