@@ -102,6 +102,7 @@ public class InvoiceBO {
                 logger.log(Level.SEVERE, null, ex);
             }
         } catch (SQLException ex) {
+            ex.printStackTrace();
             if (logger.isLoggable(Level.SEVERE)) {
                 logger.log(Level.SEVERE, null, ex);
             }
@@ -144,6 +145,7 @@ public class InvoiceBO {
                 logger.log(Level.SEVERE, null, ex);
             }
         } catch (SQLException ex) {
+            ex.printStackTrace();
             if (logger.isLoggable(Level.SEVERE)) {
                 logger.log(Level.SEVERE, null, ex);
             }
